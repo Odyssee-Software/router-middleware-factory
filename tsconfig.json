@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "module": "CommonJS",
+    "target": "ES2021",
+    // "module": "ESNext",
+    // "target": "ESNext",
+    "declaration": true,
+    "sourceMap": true,
+    "removeComments": false,
+    "preserveConstEnums" : true,
+    "skipLibCheck": true,
+    "moduleResolution":"node",
+    "outDir": "dist",
+    "esModuleInterop": true,
+    "noImplicitAny": false,
+    "baseUrl": "."
+  },
+  "include": [ "./src/**/*", "config/tsconfig.ts" ],
+  "exclude": ["./node_modules"]
+}
