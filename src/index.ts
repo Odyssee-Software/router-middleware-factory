@@ -15,6 +15,8 @@ export interface IRouterOptions{
   use?:UseOptions;
 }
 
+export type Application = express.Application;
+
 export { Router , Request , Response , NextFunction };
 export class _routerMiddlewareFactory{
 
@@ -24,37 +26,37 @@ export class _routerMiddlewareFactory{
 
     if(options.index){
       let [ param , callback ] = options.index;
-      endpoint = ( param ? path.join( endpoint , `:${param}` ) : endpoint);
-      router.get( endpoint , callback );
+      let compose_endpoint = ( param ? path.join( endpoint , `:${param}` ) : endpoint);
+      router.get( compose_endpoint , callback );
     }
 
     if(options.find){
       let [ param , callback ] = options.find;
-      endpoint = ( param ? path.join( endpoint , `:${param}` ) : endpoint);
-      router.get( endpoint , callback );
+      let compose_endpoint = ( param ? path.join( endpoint , `:${param}` ) : endpoint);
+      router.get( compose_endpoint , callback );
     }
 
     if(options.create){
       let [ param , callback ] = options.create;
-      endpoint = ( param ? path.join( endpoint , `:${param}` ) : endpoint);
-      router.put( endpoint , callback );
+      let compose_endpoint = ( param ? path.join( endpoint , `:${param}` ) : endpoint);
+      router.put( compose_endpoint , callback );
     }
 
     if(options.update){
       let [ param , callback ] = options.update;
-      endpoint = ( param ? path.join( endpoint , `:${param}` ) : endpoint);
-      router.patch( endpoint , callback );
+      let compose_endpoint = ( param ? path.join( endpoint , `:${param}` ) : endpoint);
+      router.patch( compose_endpoint , callback );
     }
 
     if(options.delete){
       let [ param , callback ] = options.delete;
-      endpoint = ( param ? path.join( endpoint , `:${param}` ) : endpoint);
-      router.delete( endpoint , callback );
+      let compose_endpoint = ( param ? path.join( endpoint , `:${param}` ) : endpoint);
+      router.delete( compose_endpoint , callback );
     }
 
     if(options.use)for(const use of options.use){
       let [ chanel , routerMiddleware ] = use;
-      router.use( chanel , routerMiddleware );
+      router.use( ( chanel ? path.join( endpoint , chanel ) : endpoint ) , routerMiddleware );
     }
 
     return router;
